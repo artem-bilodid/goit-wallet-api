@@ -1,4 +1,5 @@
 const { Transaction } = require('../../models');
+const currency = require('currency.js');
 
 const addTransaction = async (req, res, next) => {
   try {
@@ -13,7 +14,9 @@ const addTransaction = async (req, res, next) => {
       ?.sort({ createdAt: -1 })
       ?.limit(ONE_TRANSACTION);
 
-    const newBalance = isExpense ? currentBalance - amount : currentBalance + amount;
+    const newBalance = isExpense
+      ? currency(currentBalance).subtract(amount)
+      : currency(currentBalance).add(amount);
 
     if (newBalance < 0) {
       return res.status(409).json({ message: 'Insufficient funds' });
