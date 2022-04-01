@@ -19,7 +19,7 @@ const addTransaction = async (req, res, next) => {
       : currency(currentBalance).add(amount);
 
     if (newBalance < 0) {
-      return res.status(409).json({ message: 'Insufficient funds' });
+      return res.status(400).json({ message: 'Insufficient funds' });
     }
 
     const newTransaction = await Transaction.create({
