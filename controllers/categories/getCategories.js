@@ -7,13 +7,7 @@ const getCategories = async (req, res) => {
 
   const categories = await Category.find({ owner: _id });
 
-  res.json({
-    status: 'success',
-    code: 200,
-    data: {
-      result: [...defaultCategories, ...categories],
-    },
-  });
+  return res.status(200).json([...defaultCategories, ...categories]);
 };
 
 module.exports = getCategories;
