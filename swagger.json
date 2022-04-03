@@ -361,13 +361,17 @@
       "Statistic": {
         "type": "object",
         "properties": {
-          "isExpense": "boolean",
+          "isExpense": {
+            "type": "boolean"
+          },
           "categories": {
             "type": "array",
             "description": "List of categories",
             "items": { "$ref": "#/components/schemas/Category" }
           },
-          "totalSum": "number"
+          "totalSum": {
+            "type": "number"
+          }
         }
       },
       "Category": {
