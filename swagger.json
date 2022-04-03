@@ -252,7 +252,7 @@
         }
       }
     },
-    "api/categories/": {
+    "/api/categories/": {
       "get": {
         "tags": ["Categories"],
         "summary": "Get categories",
