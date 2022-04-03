@@ -36,14 +36,13 @@
       "post": {
         "tags": ["User"],
         "summary": "Create user",
-        "security": [{ "Bearer": [] }],
         "description": "This can only be done by the logged in user.",
         "operationId": "createUser",
         "requestBody": {
           "required": true,
           "description": "Created user object",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/RegistrationRequest"
               }
@@ -72,14 +71,13 @@
       "post": {
         "tags": ["User"],
         "summary": "Logs user into the system",
-        "security": [{ "Bearer": [] }],
         "description": "Login of user",
         "operationId": "login",
         "requestBody": {
           "required": true,
           "description": "User's password and email",
           "content": {
-            "*/*": {
+            "application/json": {
               "schema": {
                 "$ref": "#/components/schemas/LoginRequest"
               }
