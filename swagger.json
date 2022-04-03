@@ -51,7 +51,7 @@
         },
         "responses": {
           "201": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -87,7 +87,7 @@
 
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
@@ -108,9 +108,14 @@
         "tags": ["User"],
         "summary": "Logs out current logged in user session",
         "operationId": "logout",
+
         "responses": {
-          "default": {
-            "description": "successful operation",
+          "204": {
+            "description": "Successful operation",
+            "content": {}
+          },
+          "401": {
+            "description": "Not authorized",
             "content": {}
           }
         }
@@ -121,27 +126,126 @@
         "tags": ["User"],
         "summary": "Get user",
         "operationId": "getCurrentUser",
+
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "$ref": "#/components/schemas/CurrentResponse"
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get transactions",
+        "operationId": "getTransactions",
+
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "List of user's transactions",
+                  "items": { "$ref": "#/components/schemas/Transaction" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": ["Transactions"],
+        "summary": "Add new transaction",
+        "operationId": "addTransaction",
+        "requestBody": {
+          "required": true,
+          "description": "Add new transaction",
+          "content": {
+            "application/json": {
+              "schema": {
+                "$ref": "#/components/schemas/TransactionRequest"
+              }
+            }
+          }
+        },
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "List of user's transactions",
+                  "items": { "$ref": "#/components/schemas/Transaction" }
+                }
+              }
+            }
+          },
+          "404": {
+            "description": "User not found",
+            "content": {}
+          }
+        }
+      }
+    },
+    "/api/transactions/statistics": {
+      "get": {
+        "tags": ["Transactions"],
+        "summary": "Get statistics of transactions",
+        "operationId": "getStatistics",
         "parameters": [
           {
-            "current": "Object of user",
-            "in": "path",
-            "description": "The name that needs to be fetched. Use user1 for testing. ",
-            "required": true,
+            "name": "year",
+            "in": "query",
+            "description": "The year that needs to be fetched. ",
+
             "schema": {
-              "type": "string"
+              "type": "number"
+            }
+          },
+          {
+            "name": "month",
+            "in": "query",
+            "description": "The month that needs to be fetched.",
+
+            "schema": {
+              "type": "number"
             }
           }
         ],
         "responses": {
           "200": {
-            "description": "successful operation",
+            "description": "Successful operation",
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistrationRequest"
+                  "type": "array",
+                  "description": "List of statistcs",
+                  "items": { "$ref": "#/components/schemas/Statistic" }
                 }
               }
             }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
           }
         }
       }
@@ -205,6 +309,72 @@
             "description": "User's password",
             "example": "qwerty123"
           }
+        }
+      },
+      "CurrentResponse": {
+        "type": "object",
+        "properties": {
+          "_id": {
+            "type": "string",
+            "description": "User's _id",
+            "example": "62496a0a7bcc73d5fda678ec"
+          },
+          "email": {
+            "type": "string",
+            "description": "User's email",
+            "format": "email"
+          },
+          "name": {
+            "type": "string",
+            "description": "User's name",
+            "format": "name"
+          }
+        }
+      },
+      "Transaction": {
+        "type": "object",
+        "properties": {
+          "isExpense": {
+            "type": "boolean"
+          },
+          "category": { "type": "string" },
+          "amount": { "type": "number" },
+          "comment": { "type": "string" },
+          "balance": { "type": "number" },
+          "owner": { "type": "string" },
+          "_id": { "type": "string" },
+          "createdAt": { "type": "string", "example": "2022-04-03T11:37:52.352Z" },
+          "updatedAt": { "type": "string", "example": "2022-04-03T11:37:52.352Z" }
+        }
+      },
+      "TransactionRequest": {
+        "type": "object",
+        "properties": {
+          "isExpense": {
+            "type": "boolean"
+          },
+          "category": { "type": "string" },
+          "amount": { "type": "number" },
+          "comment": { "type": "string" }
+        }
+      },
+      "Statistic": {
+        "type": "object",
+        "properties": {
+          "isExpense": "boolean",
+          "categories": {
+            "type": "array",
+            "description": "List of categories",
+            "items": { "$ref": "#/components/schemas/Category" }
+          },
+          "totalSum": "number"
+        }
+      },
+      "Category": {
+        "type": "object",
+        "propperties": {
+          "category": "string",
+          "categorySum": "number"
         }
       }
     },
