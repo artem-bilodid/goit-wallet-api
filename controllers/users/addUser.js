@@ -1,4 +1,6 @@
 const { User } = require('../../models');
+const jwt = require('jsonwebtoken');
+const { JWT_KEY } = process.env;
 
 const addUser = async (req, res, next) => {
   try {
@@ -11,10 +13,13 @@ const addUser = async (req, res, next) => {
     }
 
     const newUser = new User({ email, name });
+    const token = jwt.sign({ _id: newUser._id, email }, JWT_KEY);
+
+    newUser.token = token;
     newUser.setPassword(password);
     await newUser.save();
 
-    return res.status(201).json({ user: { email, name } });
+    return res.status(201).json({ token, user: { email, name } });
   } catch (error) {
     next(error);
   }
