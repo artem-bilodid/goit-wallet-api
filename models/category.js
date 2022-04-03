@@ -2,6 +2,10 @@ const { Schema, model } = require('mongoose');
 
 const categorySchema = Schema(
   {
+    isExpense: {
+      type: Boolean,
+      required: [true, 'Set if transaction is Expense or not'],
+    },
     category: {
       type: String,
       required: [true, 'Set the Category'],

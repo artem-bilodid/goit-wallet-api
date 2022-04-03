@@ -1,34 +1,52 @@
 [
   {
     "_id": "1",
-    "category": "Основной"
+    "category": "Основной",
+    "isExpense": "true"
   },
   {
     "_id": "2",
-    "category": "Еда"
+    "category": "Еда",
+    "isExpense": "true"
   },
   {
     "_id": "3",
-    "category": "Авто"
+    "category": "Авто",
+    "isExpense": "true"
   },
   {
     "_id": "4",
-    "category": "Развитие"
+    "category": "Развитие",
+    "isExpense": "true"
   },
   {
     "_id": "5",
-    "category": "Дети"
+    "category": "Дети",
+    "isExpense": "true"
   },
   {
     "_id": "6",
-    "category": "Дом"
+    "category": "Дом",
+    "isExpense": "true"
   },
   {
     "_id": "7",
-    "category": "Образование"
+    "category": "Образование",
+    "isExpense": "true"
   },
   {
     "_id": "8",
-    "category": "Остальные"
+    "category": "Остальные",
+    "isExpense": "true"
+  },
+  {
+    "_id": "9",
+    "category": "Регулярный доход",
+    "isExpense": "false"
+  },
+  {
+    "_id": "10",
+    "category": "Нерегулярный доход",
+    "isExpense": "false"
   }
 ]

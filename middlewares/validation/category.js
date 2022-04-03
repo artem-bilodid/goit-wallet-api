@@ -3,6 +3,7 @@ const Joi = require('joi');
 const categoryValidation = {
   createCategoryValidation: (req, res, next) => {
     const schema = Joi.object({
+      isExpense: Joi.boolean().required(),
       category: Joi.string().max(50).required(),
     });
 
