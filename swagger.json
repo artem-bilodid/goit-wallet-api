@@ -251,6 +251,74 @@
           }
         }
       }
+    },
+    "api/categories/": {
+      "get": {
+        "tags": ["Categories"],
+        "summary": "Get categories",
+        "operationId": "getCategories",
+
+        "security": [{ "Bearer": [] }],
+        "responses": {
+          "200": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "List of categories",
+                  "items": { "$ref": "#/components/schemas/Categories" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          }
+        }
+      },
+      "post": {
+        "tags": ["Categories"],
+        "summary": "Add categories",
+        "operationId": "addCategory",
+
+        "security": [{ "Bearer": [] }],
+
+        "requestBody": {
+          "required": true,
+          "description": "Created new category",
+          "content": {
+            "application/json": {
+              "schema": {
+                "type": "object",
+                "properties": {
+                  "category": { "type": "string" },
+                  "isExpense": { "type": "boolean" }
+                }
+              }
+            }
+          }
+        },
+        "responses": {
+          "201": {
+            "description": "Successful operation",
+            "content": {
+              "application/json": {
+                "schema": {
+                  "type": "array",
+                  "description": "List of categories",
+                  "items": { "$ref": "#/components/schemas/Categories" }
+                }
+              }
+            }
+          },
+          "400": {
+            "description": "Bad request",
+            "content": {}
+          }
+        }
+      }
     }
   },
   "components": {
@@ -372,14 +440,22 @@
             "items": {
               "type": "object",
               "properties": {
-                "category": "string",
-                "categorySum": "number"
+                "category": { "type": "string" },
+                "categorySum": { "type": "number" }
               }
             }
           },
           "totalSum": {
             "type": "number"
           }
+        }
+      },
+      "Categories": {
+        "type": "object",
+        "properties": {
+          "_id": { "type": "string" },
+          "category": { "type": "string" },
+          "isExpense": { "type": "boolean" }
         }
       }
     },
