@@ -36,7 +36,7 @@
       "post": {
         "tags": ["User"],
         "summary": "Create user",
-
+        "security": [{ "Bearer": [] }],
         "description": "This can only be done by the logged in user.",
         "operationId": "createUser",
         "requestBody": {
@@ -56,7 +56,7 @@
             "content": {
               "application/json": {
                 "schema": {
-                  "$ref": "#/components/schemas/RegistarationResponse"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               }
             }
@@ -73,55 +73,27 @@
         "tags": ["User"],
         "summary": "Logs user into the system",
         "security": [{ "Bearer": [] }],
+        "description": "Login of user",
         "operationId": "login",
-        "parameters": [
-          {
-            "name": "username",
-            "in": "query",
-            "description": "The user name for login",
-            "required": true,
-            "schema": {
-              "type": "string"
-            }
-          },
-          {
-            "name": "password",
-            "in": "query",
-            "description": "The password for login in clear text",
-            "required": true,
-            "schema": {
-              "type": "string"
+        "requestBody": {
+          "required": true,
+          "description": "User's password and email",
+          "content": {
+            "*/*": {
+              "schema": {
+                "$ref": "#/components/schemas/LoginRequest"
+              }
             }
           }
-        ],
+        },
+
         "responses": {
           "200": {
             "description": "successful operation",
-            "headers": {
-              "X-Rate-Limit": {
-                "description": "calls per hour allowed by the user",
-                "schema": {
-                  "type": "integer",
-                  "format": "int32"
-                }
-              },
-              "X-Expires-After": {
-                "description": "date in UTC when token expires",
-                "schema": {
-                  "type": "string",
-                  "format": "date-time"
-                }
-              }
-            },
             "content": {
-              "application/xml": {
-                "schema": {
-                  "type": "string"
-                }
-              },
               "application/json": {
                 "schema": {
-                  "type": "string"
+                  "$ref": "#/components/schemas/AuthResponse"
                 }
               }
             }
@@ -200,18 +172,24 @@
           }
         }
       },
-      "RegistarationResponse": {
+      "AuthResponse": {
         "type": "object",
         "properties": {
-          "name": {
-            "type": "string",
-            "description": "User's name",
-            "format": "name"
-          },
-          "email": {
-            "type": "string",
-            "description": "User's email",
-            "format": "email"
+          "token": { "type": "string", "description": "User's token", "format": "JWT" },
+          "user": {
+            "type": "object",
+            "properties": {
+              "name": {
+                "type": "string",
+                "description": "User's name",
+                "format": "name"
+              },
+              "email": {
+                "type": "string",
+                "description": "User's email",
+                "format": "email"
+              }
+            }
           }
         }
       },
@@ -230,31 +208,13 @@
             "example": "qwerty123"
           }
         }
-      },
-      "LoginResponse": {
-        "type": "object",
-        "properties": {
-          "token": { "type": "string", "description": "User's token", "format": "JWT" },
-          "user": {
-            "name": {
-              "type": "string",
-              "description": "User's name",
-              "format": "name"
-            },
-            "email": {
-              "type": "string",
-              "description": "User's email",
-              "format": "email"
-            }
-          }
-        }
       }
     },
 
     "securitySchemes": {
       "Bearer": {
         "type": "http",
-        "schema": "bearer",
+        "scheme": "bearer",
         "bearerFormat": "JWT"
       }
     }
