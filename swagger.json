@@ -1,8 +1,8 @@
 {
   "openapi": "3.0.1",
   "info": {
-    "title": "Swagger test",
-    "description": "Showing off swagger-ui-express",
+    "title": "Wallet API",
+    "description": "GoIT School Project",
     "termsOfService": "http://swagger.io/terms/",
     "contact": {
       "email": "apiteam@swagger.io"
@@ -15,12 +15,15 @@
   },
   "consumes": ["application/json"],
   "produces": ["application/json"],
-  "servers": [{ "url": "http://localhost:3000" }],
+  "servers": [
+    { "url": "https://goit-wallet-api.herokuapp.com" },
+    { "url": "http://localhost:3000" }
+  ],
 
   "tags": [
     {
       "name": "User",
-      "description": "user endpoints"
+      "description": "User endpoints"
     },
     {
       "name": "Transactions",
@@ -28,7 +31,7 @@
     },
     {
       "name": "Categories",
-      "description": "endpoints of categories"
+      "description": "Categories endpoints"
     }
   ],
   "paths": {
