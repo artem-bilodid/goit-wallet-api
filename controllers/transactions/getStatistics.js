@@ -21,8 +21,8 @@ const getStatistics = async (req, res, next) => {
         $match: {
           owner: ObjectId(_id),
           createdAt: {
-            $gte: startPoint, //тут указываете с какого числа месяца
-            $lt: endPoint, //по какое число месяца.
+            $gte: startPoint, // тут указываете с какого числа месяца
+            $lt: endPoint, // по какое число месяца.
           },
         },
       },
