@@ -7,7 +7,8 @@ const transactionSchema = Schema(
       required: [true, 'Set if transaction is Expense or not'],
     },
     category: {
-      type: String,
+      type: Schema.Types.ObjectId,
+      ref: 'category',
       required: [true, 'Set the Category'],
     },
     amount: {

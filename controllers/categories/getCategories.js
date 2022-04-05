@@ -1,15 +1,12 @@
 const { Category } = require('../../models');
 
-const defaultCategories = require('../../db/defaultCategories.json');
-
 const getCategories = async (req, res) => {
   const { _id } = req.user;
 
-  const categories = await Category.find({ owner: _id });
+  const categories = await Category.find({ $or: [{ owner: { $exists: false } }, { owner: _id }] });
 
-  return res.status(200).json([...defaultCategories, ...categories]);
+  return res.status(200).json(categories);
 };
 
 module.exports = getCategories;
 
-//

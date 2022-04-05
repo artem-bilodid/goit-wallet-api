@@ -27,8 +27,19 @@ const getStatistics = async (req, res, next) => {
         },
       },
       {
+        $lookup: {
+          from: 'categories',
+          localField: 'category',
+          foreignField: '_id',
+          as: 'categoryObj',
+        },
+      },
+      {
+        $unwind: '$categoryObj',
+      },
+      {
         $group: {
-          _id: { isExpense: '$isExpense', category: '$category' },
+          _id: { isExpense: '$isExpense', category: '$categoryObj.category' },
           categorySum: { $sum: '$amount' },
         },
       },
