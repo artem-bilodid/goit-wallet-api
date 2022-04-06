@@ -4,7 +4,8 @@ const { JWT_KEY } = process.env;
 
 const login = async (req, res, next) => {
   try {
-    const { email, password } = req.body;
+    const { password } = req.body;
+    const email = req.body.email.toLowerCase();
 
     const existingUser = await User.findOne({ email });
 
