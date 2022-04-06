@@ -4,7 +4,7 @@ const categoryValidation = {
   createCategoryValidation: (req, res, next) => {
     const schema = Joi.object({
       isExpense: Joi.boolean().required(),
-      category: Joi.string().max(50).required(),
+      name: Joi.string().max(50).required(),
     });
 
     const validationResult = schema.validate(req.body);

@@ -39,7 +39,7 @@ const getStatistics = async (req, res, next) => {
       },
       {
         $group: {
-          _id: { isExpense: '$isExpense', category: '$categoryObj.category' },
+          _id: { isExpense: '$isExpense', category: '$categoryObj.name' },
           categorySum: { $sum: '$amount' },
         },
       },

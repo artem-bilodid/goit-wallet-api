@@ -6,9 +6,9 @@ const categorySchema = Schema(
       type: Boolean,
       required: [true, 'Set if transaction is Expense or not'],
     },
-    category: {
+    name: {
       type: String,
-      required: [true, 'Set the Category'],
+      required: [true, 'Set the Category Name'],
     },
     owner: {
       type: Schema.Types.ObjectId,

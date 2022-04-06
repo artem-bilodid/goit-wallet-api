@@ -296,7 +296,7 @@
               "schema": {
                 "type": "object",
                 "properties": {
-                  "category": { "type": "string" },
+                  "name": { "type": "string" },
                   "isExpense": { "type": "boolean" }
                 }
               }
@@ -419,7 +419,7 @@
                 "description": "User's _id",
                 "example": "62496a0a7bcc73d5fda678ec"
               },
-              "category": {
+              "name": {
                 "type": "string",
                 "description": "Cetegory name",
                 "example": "Регулярный доход"
@@ -477,7 +477,7 @@
         "type": "object",
         "properties": {
           "_id": { "type": "string" },
-          "category": { "type": "string" },
+          "name": { "type": "string" },
           "isExpense": { "type": "boolean" }
         }
       }
