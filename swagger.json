@@ -408,9 +408,24 @@
         "type": "object",
         "properties": {
           "isExpense": {
-            "type": "boolean"
+            "type": "boolean",
+            "example": false
           },
-          "category": { "type": "string" },
+          "category": {
+            "type": "object",
+            "properties": {
+              "_id": {
+                "type": "string",
+                "description": "User's _id",
+                "example": "62496a0a7bcc73d5fda678ec"
+              },
+              "category": {
+                "type": "string",
+                "description": "Cetegory name",
+                "example": "Регулярный доход"
+              }
+            }
+          },
           "amount": { "type": "number" },
           "comment": { "type": "string" },
           "balance": { "type": "number" },
