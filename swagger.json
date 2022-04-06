@@ -439,10 +439,15 @@
         "type": "object",
         "properties": {
           "isExpense": {
-            "type": "boolean"
+            "type": "boolean",
+            "example": false
           },
-          "category": { "type": "string" },
-          "amount": { "type": "number" },
+          "category": {
+            "type": "string",
+            "description": "Cetegory ID",
+            "example": "624c80387f49cd7760991931"
+          },
+          "amount": { "type": "number", "example": 10.97 },
           "comment": { "type": "string" }
         }
       },
