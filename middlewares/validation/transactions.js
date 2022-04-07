@@ -12,7 +12,7 @@ const transactionsValidation = {
         .required()
         .pattern(/^(?=[a-f\d]{24}$)(\d+[a-f]|[a-f]+\d)/i),
       amount: Joi.number().positive().precision(2).required(),
-      comment: Joi.string().max(200),
+      comment: Joi.string().min(0).max(200),
     });
 
     const categoryId = req.body.category;
