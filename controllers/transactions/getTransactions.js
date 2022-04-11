@@ -3,7 +3,7 @@ const { Transaction } = require('../../models');
 const getTransactions = async (req, res, next) => {
   try {
     const { _id } = req.user;
-    const TRANSACTIONS_LIMIT = 6;
+    const TRANSACTIONS_LIMIT = 5;
 
     const transactions = await Transaction.find({ owner: _id })
       ?.sort({ createdAt: -1 })
