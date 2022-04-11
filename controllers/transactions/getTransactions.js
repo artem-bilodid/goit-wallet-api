@@ -8,8 +8,7 @@ const getTransactions = async (req, res, next) => {
     const transactions = await Transaction.find({ owner: _id })
       ?.sort({ createdAt: -1 })
       ?.limit(TRANSACTIONS_LIMIT)
-      ?.populate('category', 'name')
-      ?.sort({ createdAt: 1 });
+      ?.populate('category', 'name');
 
     return res.status(200).json(transactions);
   } catch (error) {
